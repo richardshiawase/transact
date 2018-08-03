@@ -1,0 +1,74 @@
+<?php
+class Barang{
+    var $namaBarang;
+    var $qty;
+    
+    function __construct($namaBarang,$qty){
+        $this->namaBarang = $namaBarang;
+        $this->qty = $qty;
+       
+       
+        
+    }
+    public function setNama($namaBarang){
+        $this->namaBarang = $namaBarang;
+    }
+    public function getNamaBarang(){
+        return $this->namaBarang;
+    }
+    public function setQty($qty){
+        $this->qty = $qty;
+    }
+    public function getQty(){
+        return $this->qty;
+    }
+}
+
+class Cart{
+    var $cart = array();
+    var $sumQty;
+    
+  
+    
+    
+    public function setCart($barang){
+     $this->cart[] = $barang;
+    
+    }
+    
+    public function getCart(){
+        return $this->cart;
+    }
+
+}
+?>
+
+
+
+
+<form action="" method="POST">
+    Nama Barang: 
+    <input type="text" name="barangText" id="barangText">
+    <br>
+    Qty : 
+    <input type="text" name="qtyText" id="qtyText">
+    <br>
+    <input type="submit" value="submit">
+</form>
+<?php
+if($_SERVER['REQUEST_METHOD']=="POST"){
+    $namaBarang = $_POST['barangText'];
+    $qty = $_POST['qtyText'];
+    $rinso = new Barang("Rinso",2);
+    
+    $krimEkonomi = new Barang("krim Ekonomi",1);
+    
+    $brg = new Barang($namaBarang,$qty);
+    $cart = new Cart();
+    $cart->setCart($rinso);
+    $cart->setCart($krimEkonomi);
+    $cart->setCart($brg);
+    $list = $cart->getCart();
+    print_r($list);
+}
+?>
